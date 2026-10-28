@@ -219,6 +219,11 @@
       <div class="title">Multibody Dynamics and Residual Correction for Underactuated Linkage Grippers</div>
       <div class="meta">Y. Yang, et al.<span class="tag prep">In preparation</span></div>
     </div>
+
+    <div class="entry">
+      <div class="title">Underwater Grasp Hold Capacity: From Design Boundaries to Non-Iterative Neural Prediction at Runtime</div>
+      <div class="meta">Y. Yang, et al. &mdash; in preparation (target: <em>Ocean Engineering</em>)<span class="tag prep">In preparation</span></div>
+    </div>
   </section>
 
   <section>
@@ -237,6 +242,16 @@
     </div>
 
     <div class="entry">
+      <div class="title">Underwater perception: visual SLAM and imaging sonar</div>
+      <div class="meta">Isaac Sim / Isaac Lab simulation study &middot; 2026</div>
+      <ul class="plain">
+        <li>Rebuilt a pool-scale ROV scene in Isaac Sim 4.5 with four synchronised cameras, six AprilTag boards and a turbidity model (visibility, scattering, marine snow, caustics) exposed through a live parameter dashboard, and recorded synchronised video with ground-truth poses.</li>
+        <li>Built an offline visual SLAM chain — tag anchoring, KLT front-end, multi-view triangulation, PnP relocalisation and joint sparse bundle adjustment — reaching 97.1% / 93.3% localisable frames and 3.7 / 4.1 cm median error in clear and turbid water, measured in the tag world frame without ground-truth alignment or scale fitting.</li>
+        <li>Implemented a forward-looking imaging sonar with ray casting, target strength, transmission loss, Rayleigh speckle and acoustic shadow, plus pose-accumulated mapping; target range and position error were 0.25 m and 0.30 m inside the geometric window. The two chains are complementary — vision resolves 0.09 m at 8 m, sonar holds 0.30 m out to 12 m.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
       <div class="title">Grey-box inverse dynamics for the salvage ROV</div>
       <div class="meta">Branch study derived from the world-model project &middot; 2024 – present</div>
       <ul class="plain">
@@ -245,12 +260,14 @@
     </div>
 
     <div class="entry">
-      <div class="title">Underactuated salvage gripper: kinetostatics, multibody dynamics and residual correction</div>
+      <div class="title">Underactuated salvage gripper: kinetostatics, dynamics and runtime hold-capacity prediction</div>
       <div class="meta">2024 – present</div>
       <ul class="plain">
-        <li>Built a virtual-work-based kinetostatic model of a double four-bar underactuated gripper giving fast closed-form contact-force and load-capacity solutions, and used it to assess environmental disturbance forces on the grasp.</li>
+        <li>Built a virtual-work-based kinetostatic model of a double four-bar underactuated gripper giving closed-form contact-force and load-capacity solutions, and extended it to dry and immersed hold capacity, including sensitivity to the reading instant, object shape and seabed-assisted grasping.</li>
         <li>Validated the solver against ADAMS simulation and an experimental gripper prototype; derived the closed-form multibody dynamics via screw theory, resolving closed kinematic loops with non-minimal coordinates and Lagrange multipliers.</li>
         <li>Coupled the physical model with a parameter network and gated residual correction to absorb contact, friction and unmodelled hydrodynamic effects.</li>
+        <li>Trained a residual contact-dynamics predictor on 20k simulated grasp episodes: 0.49–3.88 mm error over 20–150 ms horizons, against 1.44–63.3 mm for a constant-velocity baseline, across three seeds and held-out splits.</li>
+        <li>Replaced a ten-step autoregressive rollout with a one-shot 100 ms predictor — 2.10 mm against 18.37 mm, 0.75 ms on CPU (8.6× faster) — and reproduced the physical hold/slip criterion on 99.4–99.7% of starts.</li>
       </ul>
     </div>
   </section>
@@ -279,6 +296,7 @@
       <li><strong>1st inventor.</strong> Control System and Control Method for a Bionic Sea-Turtle Amphibious Vehicle. CN202310492163.5<span class="tag pat">Filed</span></li>
       <li><strong>4th inventor.</strong> Deep-Water Target Salvage Apparatus and Salvage Method. CN119329722B<span class="tag pat">Granted</span></li>
       <li><strong>4th inventor.</strong> Adaptive Underwater Adsorption Device and Underwater Salvage Apparatus. CN119262239B<span class="tag pat">Granted</span></li>
+      <li><strong>4th inventor.</strong> Underwater Salvage Gripper Device and Salvage Apparatus. CN119260779A<span class="tag pat">Filed</span></li>
       <li><strong>4th inventor.</strong> Heavy Fuel Oil Heating System and Heating Method for Deep-Water Shipwrecks. CN121357744A<span class="tag pat">Under examination</span></li>
       <li><strong>5th inventor.</strong> Bionic Sea-Turtle Flapping-Wing Locomotion Device. CN202310401637.0<span class="tag pat">Filed</span></li>
     </ul>
